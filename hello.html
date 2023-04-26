@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Webpage</title>
+    <style>
+        body {
+        background-color: pink;
+    }
+    
+        .logo-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+        .logo-container a {
+        margin-left: 20px;
+    }
+
+        .logo-container img {
+        width: 50px;
+        height: 50px;
+    }
+
+
+        .ayaya-container {
+        position: fixed;
+        top: 50%;
+        left: 40%;
+        transform: translate(-50%, -50%) translateX(-30%);
+    }
+
+        .ayaya-container img {
+        display: block;
+        transform: translateY(-10px);
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+        .ayaya-container img.loaded {
+        opacity: 1;
+        transform: none;
+        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
+      }
+
+
+        .weeb-container {
+        font-size: 35px;
+        position: fixed;
+        top: 33%;
+        left: 80%;
+        transform: translate(-40%, -45%) translateX(-70%);
+        }
+        
+        .button-container {
+        font-size: 25px;
+        position: absolute;
+        bottom: -140px;
+        left: 50%;
+        transform: translateX(-50%);
+        }
+
+        .button-row {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+        }
+        
+        .button-row:last-child {
+        margin-bottom: 0;
+        }
+
+        .btn-lg {
+        font-size: 40px;
+        padding: 12px 24px;
+        margin-right: 10px;
+        border: 2px solid orange;
+        border-radius: 30px;
+        background-color: transparent;
+        color: white;
+        cursor: pointer;
+        }
+
+        .btn-lg:hover {
+        background-color: orange;
+        }
+
+
+        header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px;
+          background-color: #e9abab;
+          box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+  
+        .logo img {
+          max-width: 100%;
+          height: auto;
+        }
+  
+        nav ul {
+          display: flex;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+  
+        nav li {
+          margin-left: 20px;
+        }
+  
+        nav li:first-child {
+          margin-left: 0;
+        }
+  
+        nav a {
+          display: block;
+          padding: 10px;
+          text-decoration: none;
+          color: #333;
+          font-weight: bold;
+        }
+  
+        nav a.connect-metamask {
+          background-color: #f75d2b;
+          color: #fff;
+          border-radius: 20px;
+          padding: 8px 20px;
+          border: 2px solid #f75d2b;
+          transition: all 0.3s ease;
+        }
+  
+        nav a.connect-metamask:hover {
+          background-color: transparent;
+          color: #f75d2b;
+        }
+
+        
+.dropdown {
+  position: relative;
+  z-index: 1000;
+}
+
+      </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="C:\Users\stayn\Desktop\ayayaclap\ayayaclap.png" alt="Your Logo">
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#" class="connect-metamask" button id="connect-btn">Connect Metamask</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+        <div class="ayaya-container">
+            <img src="C:\Users\stayn\Desktop\ayayaclap\ayaya.png" alt="Image" onload="this.classList.add('loaded')">
+        </div>
+
+         <div class="weeb-container">
+            <h1>AYAYA Weebs In</h1>
+            <div class="button-container">
+                <div class="button-container">
+                    <div class="button-row">
+                      <button class="btn-lg">$Clap</button>
+                    </div>
+                    <div class="button-row">
+                      <button class="btn-lg">Juicer 100x $Clap(0.02eth)</button>
+        </div>
+    </main>
+    <div class="logo-container">
+        <a href="https://example.com"><img src="C:\Users\stayn\Desktop\ayayaclap\twitter.png" alt="Logo 1"></a>
+        <a href="https://example.com"><img src="C:\Users\stayn\Desktop\ayayaclap\uniswap.png" alt="Logo 2"></a>
+        <a href="https://example.com"><img src="C:\Users\stayn\Desktop\ayayaclap\dextools.png" alt="Logo 3"></a>
+      </div>
+
+      <script>
+        // 获取Connect Metamask按钮元素
+        const connectBtn = document.getElementById('connect-btn');
+    
+        // 当用户单击按钮时触发事件处理程序
+        connectBtn.addEventListener('click', async () => {
+          // 检查是否有安装Metamask
+          if (typeof window.ethereum === 'undefined') {
+            alert('Please install Metamask to connect your wallet.');
+            return;
+          }
+    
+          try {
+            // 请求用户连接到Metamask
+            await window.ethereum.request({ method: 'eth_requestAccounts' });
+            alert('Your wallet is connected!');
+            // 连接成功后，您可以执行其他操作，例如获取用户的以太坊地址
+          } catch (error) {
+            // 用户拒绝连接请求或发生其他错误
+            alert('Failed to connect your wallet.');
+            console.error(error);
+          }
+        });
+      </script>
+  </body>
+</html>
