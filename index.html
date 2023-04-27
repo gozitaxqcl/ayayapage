@@ -215,9 +215,6 @@ connectBtn.addEventListener('click', async () => {
     alert(`Your wallet is connected to account ${accounts[0]} on Arbitrum Mainnet!`);
     // 连接成功后，您可以执行其他操作，例如获取用户的以太坊地址
 
-    const walletAddress = accounts[0];
-    const collectBtn = document.getElementById('collect-btn');
-    collectBtn.innerHTML = walletAddress;
   } catch (error) {
     // 用户拒绝连接请求或发生其他错误
     alert('Failed to connect your wallet.');
@@ -225,7 +222,6 @@ connectBtn.addEventListener('click', async () => {
   }
 });
   </script>
-
 
 </body>
 </html>
