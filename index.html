@@ -215,28 +215,14 @@ connectBtn.addEventListener('click', async () => {
     alert(`Your wallet is connected to account ${accounts[0]} on Arbitrum Mainnet!`);
     // 连接成功后，您可以执行其他操作，例如获取用户的以太坊地址
 
-    const connectMetamask = async () => {
-  try {
-    // 请求Metamask连接
-    await ethereum.request({ method: 'eth_requestAccounts' });
-    // 获取当前账户
-    const accounts = await ethereum.request({ method: 'eth_accounts' });
-    // 显示钱包地址
-    const walletAddress = accounts[0];
-    const collectBtn = document.getElementById('collect-btn');
-    collectBtn.innerHTML = walletAddress;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
   } catch (error) {
     // 用户拒绝连接请求或发生其他错误
     alert('Failed to connect your wallet.');
     console.error(error);
   }
 });
-
   </script>
+
+
 </body>
 </html>
