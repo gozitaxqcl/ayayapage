@@ -195,24 +195,8 @@ connectBtn.addEventListener('click', async () => {
 
   try {
     // 请求用户连接到Metamask
-    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    // 获取当前网络ID
-    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-    // 检查网络是否为Arbitrum主网
-    if (chainId !== '0xa4b1') {
-      // 提示用户切换到Arbitrum主网
-      const result = window.confirm(`Please switch to the Arbitrum Mainnet. Do you want to do it now?`);
-      if (result) {
-        // 切换到Arbitrum主网
-        await window.ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0xa4b1' }]
-        });
-      } else {
-        return;
-      }
-    }
-    alert(`Your wallet is connected to account ${accounts[0]} on Arbitrum Mainnet!`);
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+    alert('Your wallet is connected!');
     // 连接成功后，您可以执行其他操作，例如获取用户的以太坊地址
   } catch (error) {
     // 用户拒绝连接请求或发生其他错误
@@ -220,3 +204,4 @@ connectBtn.addEventListener('click', async () => {
     console.error(error);
   }
 });
+
