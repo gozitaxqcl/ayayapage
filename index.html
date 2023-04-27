@@ -182,28 +182,61 @@
       </div>
 
       <script>
-        // 获取Connect Metamask按钮元素
-        const connectBtn = document.getElementById('connect-btn');
-    
-        // 当用户单击按钮时触发事件处理程序
-        connectBtn.addEventListener('click', async () => {
-          // 检查是否有安装Metamask
-          if (typeof window.ethereum === 'undefined') {
-            alert('Please install Metamask to connect your wallet.');
-            return;
-          }
-    
-          try {
-            // 请求用户连接到Metamask
-            await window.ethereum.request({ method: 'eth_requestAccounts' });
-            alert('Your wallet is connected!');
-            // 连接成功后，您可以执行其他操作，例如获取用户的以太坊地址
-          } catch (error) {
-            // 用户拒绝连接请求或发生其他错误
-            alert('Failed to connect your wallet.');
-            console.error(error);
-          }
+// 获取Connect Metamask按钮元素
+const connectBtn = document.getElementById('connect-btn');
+
+// 当用户单击按钮时触发事件处理程序
+connectBtn.addEventListener('click', async () => {
+  // 检查是否有安装Metamask
+  if (typeof window.ethereum === 'undefined') {
+    alert('Please install Metamask to connect your wallet.');
+    return;
+  }
+
+  try {
+    // 请求用户连接到Metamask
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    // 获取当前网络ID
+    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+    // 检查网络是否为Arbitrum主网
+    if (chainId !== '0xa4b1') {
+      // 提示用户切换到Arbitrum主网
+      const result = window.confirm(`Please switch to the Arbitrum Mainnet. Do you want to do it now?`);
+      if (result) {
+        // 切换到Arbitrum主网
+        await window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: '0xa4b1' }]
         });
+      } else {
+        return;
+      }
+    }
+    alert(`Your wallet is connected to account ${accounts[0]} on Arbitrum Mainnet!`);
+    // 连接成功后，您可以执行其他操作，例如获取用户的以太坊地址
+
+    const connectMetamask = async () => {
+  try {
+    // 请求Metamask连接
+    await ethereum.request({ method: 'eth_requestAccounts' });
+    // 获取当前账户
+    const accounts = await ethereum.request({ method: 'eth_accounts' });
+    // 显示钱包地址
+    const walletAddress = accounts[0];
+    const collectBtn = document.getElementById('collect-btn');
+    collectBtn.innerHTML = walletAddress;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+  } catch (error) {
+    // 用户拒绝连接请求或发生其他错误
+    alert('Failed to connect your wallet.');
+    console.error(error);
+  }
+});
+
   </script>
 </body>
 </html>
